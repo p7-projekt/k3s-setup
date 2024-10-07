@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haskell-deployment #Name of the deployment in the namespace
+  labels:
+    app: haskell #Used to select and manage pods with this label
+spec: #The desired state of the deployment
+  replicas: 2 #Amount of replicas we want
+  strategy: #What strategy is used to replace old pods with new pods
+    type: RollingUpdate #Old pods are gradualy changed
+    rollingUpdate:
+      maxUnavailable: 40% #When replacing there can at maximum be a % of pods unavailable
+  selector: #Defines how the deployment selects pods to manage
+    matchLabels: #Matches label to the label of pods with the same label
+      app: haskell #Name of the label of the pods we want to manage
+  template: #Template for the pods
+    metadata:
+      labels:
+        app: haskell #Matches with the selector
+    spec:
+      containers:
+      - name: haskell
+        image: demo-app:v1.0
+        resources: #Sets the allowed amount of resources for the container
+            limits: #Teach container should not be allowed to consume more resources than specified
+              cpu: 200m #200 milliCPU (10% of one CPU core)
+              memory: 200Mi #200MiB of memory
+            requests: #This is the resources required by each container
+              cpu: 100m #100 milliCPU (10% of one CPU core)
+              memory: 200Mi
+        ports:
+        - name: httpPort
+        - containerPort: 80 #What port the container is listening on
+        livenessProbe: #Can be replicated for startupprobes.
+          httpGet: #Http type request as check
+            path: / #Path and port to the endpoint
+            port: httpPort
+          initialDelaySeconds: 5 #How long kubernetes waits before the first check
+          periodSeconds: 30 #How often kubernetes makes a check
+        startupProbe: #Same as livenessProbe but on startup
+          httpGet:
+            path: /
+            port: httpPort
+          failureThreshold: 5
+          periodSeconds: 10
