@@ -30,7 +30,7 @@ spec: #The desired state of the deployment
               memory: 200Mi
         ports:
         - name: httpPort
-        - containerPort: 80 #What port the container is listening on
+          containerPort: 80 #What port the container is listening on
         livenessProbe: #Can be replicated for startupprobes.
           httpGet: #Http type request as check
             path: / #Path and port to the endpoint
