@@ -5,7 +5,7 @@ metadata:
   labels:
     app: haskell #Used to select and manage pods with this label
 spec: #The desired state of the deployment
-  replicas: 2 #Amount of replicas we want !!!! Remove if using HPA (autoscaling)
+  replicas: 2 #Amount of replicas we want !!!! inital amount HPA will change this
   strategy: #What strategy is used to replace old pods with new pods
     type: RollingUpdate #Old pods are gradualy changed
     rollingUpdate:
