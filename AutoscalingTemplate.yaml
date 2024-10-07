@@ -15,4 +15,4 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 80 #How many percent of the minimum allocated resource is used. Can also be changed to absolute values
+        averageUtilization: 80 #How many percent of the minimum allocated resource is used. Can also be changed to absolute values.
