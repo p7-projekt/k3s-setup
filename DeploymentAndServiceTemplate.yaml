@@ -5,7 +5,7 @@ metadata:
   labels:
     app: haskell #Used to select and manage pods with this label
 spec: #The desired state of the deployment
-  replicas: 2 #Amount of replicas we want
+  replicas: 2 #Amount of replicas we want !!!! Remove if using HPA (autoscaling)
   strategy: #What strategy is used to replace old pods with new pods
     type: RollingUpdate #Old pods are gradualy changed
     rollingUpdate:
@@ -37,7 +37,7 @@ spec: #The desired state of the deployment
             port: httpPort
           initialDelaySeconds: 5 #How long kubernetes waits before the first check
           periodSeconds: 30 #How often kubernetes makes a check
-        startupProbe: #Same as livenessProbe but on startup
+        startupProbe: #Same as livenessProbe but on startup, only works until it has succeeded once.
           httpGet:
             path: /
             port: httpPort
