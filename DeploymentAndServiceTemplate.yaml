@@ -54,6 +54,6 @@ spec:
     app: haskell #Must be the same as the pod label in deployment under "template"
   ports:
     - name: haskell-service-port  
-    - protocol: TCP
+      protocol: TCP
       port: 80 #The port the service is listening on
       targetPort: httpPort #Target port (The port of the pods)
