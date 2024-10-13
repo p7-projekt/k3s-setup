@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: api-ingressroute
+  namespace: default
+spec:
+  entryPoints:
+    - web  # HTTP entry point (port 80)
+  routes:
+    - match: PathPrefix(`/`)  # Matches all requests
+      kind: Rule
+      services:
+        - name: my-service    # Kubernetes service for the API
+          port: 8080
