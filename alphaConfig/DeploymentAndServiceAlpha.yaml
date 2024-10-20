@@ -33,13 +33,13 @@ spec: #The desired state of the deployment
           containerPort: 8080 #What port the container is listening on
         livenessProbe: #Can be replicated for startupprobes.
           httpGet: #Http type request as check
-            path: / #Path and port to the endpoint
+            path: /status #Path and port to the endpoint
             port: http-port
           initialDelaySeconds: 5 #How long kubernetes waits before the first check
           periodSeconds: 30 #How often kubernetes makes a check
         startupProbe: #Same as livenessProbe but on startup, only works until it has succeeded once.
           httpGet:
-            path: /
+            path: /status
             port: http-port
           failureThreshold: 5
           periodSeconds: 10
