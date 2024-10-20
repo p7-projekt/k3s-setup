@@ -29,18 +29,18 @@ spec: #The desired state of the deployment
               cpu: 100m #100 milliCPU (10% of one CPU core)
               memory: 200Mi
         ports:
-        - name: httpPort
+        - name: http-port
           containerPort: 80 #What port the container is listening on
         livenessProbe: #Can be replicated for startupprobes.
           httpGet: #Http type request as check
             path: / #Path and port to the endpoint
-            port: httpPort
+            port: http-port
           initialDelaySeconds: 5 #How long kubernetes waits before the first check
           periodSeconds: 30 #How often kubernetes makes a check
         startupProbe: #Same as livenessProbe but on startup, only works until it has succeeded once.
           httpGet:
             path: /
-            port: httpPort
+            port: http-port
           failureThreshold: 5
           periodSeconds: 10
 ---
@@ -56,4 +56,4 @@ spec:
     - name: haskell-service-port  
       protocol: TCP
       port: 80 #The port the service is listening on
-      targetPort: httpPort #Target port (The port of the pods)
+      targetPort: http-port #Target port (The port of the pods)
