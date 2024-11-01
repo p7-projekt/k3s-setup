@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: postgres-api
+  POSTGRES_USER: postgres-api-user
+  POSTGRES_PASSWORD: postgres-api-password
