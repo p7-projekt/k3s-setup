@@ -30,6 +30,8 @@ spec: #The desired state of the deployment
           envFrom:
             - secretRef:
                 name: api-secret
+              configMapRef:
+                name: api-config
 ---
 apiVersion: v1
 kind: Service
