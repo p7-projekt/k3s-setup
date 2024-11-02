@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
-  VITE_BACKEND_URL: "VITE_BACKEND_URL=http://localhost:5015"
+  VITE_BACKEND_URL: "VITE_BACKEND_URL=http://api-service:8080"
   VITE_V1: "/v1"
