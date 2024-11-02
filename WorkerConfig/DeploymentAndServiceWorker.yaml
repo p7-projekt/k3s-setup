@@ -20,7 +20,7 @@ spec: #The desired state of the deployment
     spec:
       containers:
       - name: haskell
-        image: p7project/mozart-haskell:alpha
+        image: p7project/mozart-haskell:delta
         resources: #Sets the allowed amount of resources for the container
             limits: #Teach container should not be allowed to consume more resources than specified
               cpu: 200m #200 milliCPU (10% of one CPU core)
