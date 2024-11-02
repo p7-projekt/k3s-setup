@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment #Name of the deployment in the namespace
+  labels:
+    app: api #Used to select and manage pods with this label
+spec: #The desired state of the deployment
+  replicas: 1 #Amount of replicas we want !!!! inital amount HPA will change this
+  selector: #Defines how the deployment selects pods to manage
+    matchLabels: #Matches label to the label of pods with the same label
+      app: api #Name of the label of the pods we want to manage
+  template: #Template for the pods
+    metadata:
+      labels:
+        app: api #Matches with the selector
+    spec:
+      containers:
+      - name: api
+        image: p7project/api-backend:beta
+        resources: #Sets the allowed amount of resources for the container
+            limits: #Teach container should not be allowed to consume more resources than specified
+              cpu: 200m #200 milliCPU (10% of one CPU core)
+              memory: 200Mi #200MiB of memory (Mebibyte)
+            requests: #This is the resources required by each container
+              cpu: 100m #100 milliCPU (10% of one CPU core)
+              memory: 200Mi
+        ports:
+        - name: http-port
+          containerPort: 8080 #What port the container is listening on
+          envFrom:
+            - secretRef:
+                name: api-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+spec:
+  type: ClusterIP
+  selector:
+    app: api #Must be the same as the pod label in deployment under "template"
+  ports:
+    - name: api-service-port
+      protocol: TCP
+      port: 8080 #The port the service is listening on
+      targetPort: http-port #Target port (The port of the pods)

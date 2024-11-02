@@ -10,5 +10,5 @@ spec:
     - match: PathPrefix(`/`)  # Matches all requests
       kind: Rule
       services:
-        - name: haskell-service    # Kubernetes service for the API
+        - name: api-service    # Kubernetes service for the API
           port: 8080
