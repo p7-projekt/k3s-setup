@@ -27,9 +27,9 @@ spec: #The desired state of the deployment
         ports:
         - name: http-port
           containerPort: 8080 #What port the container is listening on
-          envFrom:
-            - configMapRef:
-                name: frontend-config
+        envFrom:
+          - configMapRef:
+              name: frontend-config
 ---
 apiVersion: v1
 kind: Service
