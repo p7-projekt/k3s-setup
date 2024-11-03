@@ -26,7 +26,7 @@ spec: #The desired state of the deployment
               memory: 200Mi
         ports:
         - name: http-port
-          containerPort: 8080 #What port the container is listening on
+          containerPort: 3000 #What port the container is listening on
         envFrom:
           - configMapRef:
               name: frontend-config
