@@ -47,7 +47,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: postgress #Must be the same as the pod label in deployment under "template"
+    app: postgres #Must be the same as the pod label in deployment under "template"
   ports:
     - name: postgres-service-port
       port: 5432 #The port the service is listening on
