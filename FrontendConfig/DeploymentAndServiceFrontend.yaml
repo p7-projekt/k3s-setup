@@ -16,7 +16,7 @@ spec: #The desired state of the deployment
     spec:
       containers:
       - name: frontend
-        image: p7project/frontend-prod:Alpha
+        image: p7project/frontend-prod:alpha
         resources: #Sets the allowed amount of resources for the container
             limits: #This container should not be allowed to consume more resources than specified
               cpu: 200m #200 milliCPU (10% of one CPU core)
@@ -27,9 +27,6 @@ spec: #The desired state of the deployment
         ports:
         - name: http-port
           containerPort: 3000 #What port the container is listening on
-        envFrom:
-          - configMapRef:
-              name: frontend-config
 ---
 apiVersion: v1
 kind: Service
