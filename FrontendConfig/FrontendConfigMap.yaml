@@ -5,4 +5,4 @@ metadata:
 data:
   VITE_BACKEND_URL: "http://api-service:8080"
   VITE_API_VERSION: "v1"
-  ORIGIN: "http://frontend-service:8080"
+  ORIGIN: "http://10.92.1.109"
