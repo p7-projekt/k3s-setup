@@ -7,13 +7,6 @@ spec:
   entryPoints:
     - web  # HTTP entry point (port 80)
   routes:
-    - match: PathPrefix(`/grafana`)
-      kind: Rule
-      priority: 10
-      services:
-        - name: kube-prometheus-stack-grafana.prometheus-grafana.svc.cluster.local
-          port: 80
-          
     - match: PathPrefix(`/`)  # Matches all requests
       kind: Rule
       priority: 1
