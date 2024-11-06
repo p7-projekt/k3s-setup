@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: api-grafana-ingressroute
+  namespace: default 
+spec:
+  entryPoints:
+    - web 
+  routes:
+    - match: PathPrefix(`/grafana`) 
+      kind: Rule
+      priority: 10
+      services:
+        - name: kube-prometheus-stack-grafana
+          namespace: prometheus-grafana
+          port: 80
+      middlewares:
+        - name: grafana-strip-prefix
+    
+    - match: PathPrefix(`/`)
+      kind: Rule
+      priority: 1
+      services:
+        - name: frontend-service
+          port: 8080
