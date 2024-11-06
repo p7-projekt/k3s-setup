@@ -9,12 +9,14 @@ spec:
   routes:
     - match: PathPrefix(`/grafana`)
       kind: Rule
+      priority: 10
       services:
         - name: kube-prometheus-stack-grafana
           port: 80
           
     - match: PathPrefix(`/`)  # Matches all requests
       kind: Rule
+      priority: 1
       services:
         - name: frontend-service    # Kubernetes service for the API
           port: 8080
