@@ -7,6 +7,12 @@ spec:
   entryPoints:
     - web  # HTTP entry point (port 80)
   routes:
+    - match:
+      kind: Rule
+      services:
+        - name: kube-prometheus-stack-grafana
+          port: 80
+          
     - match: PathPrefix(`/`)  # Matches all requests
       kind: Rule
       services:
