@@ -12,7 +12,6 @@ spec:
       priority: 10
       services:
         - name: kube-prometheus-stack-grafana
-          namespace: prometheus-grafana
           port: 80
       middlewares:
         - name: grafana-strip-prefix
