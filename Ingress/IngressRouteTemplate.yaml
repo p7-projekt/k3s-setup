@@ -11,7 +11,7 @@ spec:
       kind: Rule
       priority: 10
       services:
-        - name: kube-prometheus-stack-grafana.prometheus-grafana.svc.cluster.local
+        - name: kube-prometheus-stack-grafana
           namespace: prometheus-grafana
           port: 80
       middlewares:
