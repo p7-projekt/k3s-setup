@@ -11,7 +11,7 @@ spec:
       kind: Rule
       priority: 10
       services:
-        - name: kube-prometheus-stack-grafana
+        - name: kube-prometheus-stack-grafana.prometheus-grafana.svc.cluster.local
           port: 80
           
     - match: PathPrefix(`/`)  # Matches all requests
