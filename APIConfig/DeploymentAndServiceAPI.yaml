@@ -27,11 +27,8 @@ spec: #The desired state of the deployment
       - name: api
         image: p7project/api-backend:1.0
         resources: #Sets the allowed amount of resources for the container
-            limits: #This container should not be allowed to consume more resources than specified
-              cpu: 200m #200 milliCPU (10% of one CPU core)
-              memory: 200Mi #200MiB of memory (Mebibyte)
             requests: #This is the resources required by each container
-              cpu: 100m #100 milliCPU (10% of one CPU core)
+              cpu: 200m #100 milliCPU (10% of one CPU core)
               memory: 200Mi
         ports:
         - name: http-port
