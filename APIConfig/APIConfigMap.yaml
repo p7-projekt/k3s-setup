@@ -7,4 +7,5 @@ data:
   ASPNETCORE_ENVIRONMENT: "Production"
   MOZART_HASKELL: "haskell-service:8080"
   PERFORMANCE_TEST: "true"
+  MOZART_PYTHON: "python-service:8080"
 
