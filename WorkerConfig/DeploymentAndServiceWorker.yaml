@@ -18,6 +18,15 @@ spec: #The desired state of the deployment
       labels:
         app: haskell #Matches with the selector
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: storage-node
+                    operator: NotIn
+                    values:
+                      - "true"
       containers:
       - name: haskell
         image: p7project/mozart-haskell:delta
