@@ -11,5 +11,5 @@ spec:
       kind: Rule
       priority: 1
       services:
-        - name: frontend-service
+        - name: api-service
           port: 8080
