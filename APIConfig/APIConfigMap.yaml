@@ -6,4 +6,5 @@ data:
   API_PORT: "8080"
   ASPNETCORE_ENVIRONMENT: "Production"
   MOZART_HASKELL: "haskell-service:8080"
+  PERFORMANCE_TEST: "true"
 

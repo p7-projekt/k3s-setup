@@ -32,8 +32,8 @@ spec: #The desired state of the deployment
         image: p7project/mozart-python:2.0rc4
         resources: #Sets the allowed amount of resources for the container
             requests: #This is the resources required by each container
-              cpu: 400m #100 milliCPU (10% of one CPU core)
-              memory: 400Mi
+              cpu: 700m #e.g. 100 milliCPU (10% of one CPU core)
+              memory: 100Mi
         ports:
         - name: http-port
           containerPort: 8080 #What port the container is listening on

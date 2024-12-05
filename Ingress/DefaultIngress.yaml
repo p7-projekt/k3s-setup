@@ -11,5 +11,5 @@ spec:
       kind: Rule
       priority: 1
       services:
-        - name: python-service
+        - name: frontend-service
           port: 8080
