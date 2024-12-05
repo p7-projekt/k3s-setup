@@ -11,5 +11,5 @@ spec:
       kind: Rule
       priority: 1
       services:
-        - name: haskell-service
+        - name: python-service
           port: 8080
