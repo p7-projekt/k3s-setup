@@ -18,12 +18,9 @@ spec:
         - name: postgres
           image: postgres:16
           resources:
-            limits:
+            requests:
               cpu: 200m
               memory: 300Mi
-            requests:
-              cpu: 100m
-              memory: 200Mi
           ports:
             - name: db-port
               containerPort: 5432
