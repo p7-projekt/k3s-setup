@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /home/ubuntu/k8s-storage #Reconsider
+    path: /home/ubuntu/loki-storage #Reconsider
   nodeAffinity:
     required:
       nodeSelectorTerms:
