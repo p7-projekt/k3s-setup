@@ -23,10 +23,10 @@ spec: #The desired state of the deployment
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: storage-node
+                  - key: role
                     operator: NotIn
                     values:
-                      - "true"
+                      - storage-node
       containers:
       - name: haskell
         image: p7project/mozart-haskell:2.0rc4
