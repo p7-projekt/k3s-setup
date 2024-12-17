@@ -6,4 +6,9 @@ data:
   API_PORT: "8080"
   ASPNETCORE_ENVIRONMENT: "Production"
   MOZART_HASKELL: "haskell-service:8080"
+  PERFORMANCE_TEST: "true"
+  MOZART_PYTHON: "python-service:8080"
+  SEED_ADMIN: "true"
+  ADMIN_MAIL: "Admin@p7.dk"
+  ADMIN_PASS: "Admin!1234" 
 

@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: haskell-deployment #Name of the deployment in the namespace
+  name: python-deployment #Name of the deployment in the namespace
   labels:
-    app: haskell #Used to select and manage pods with this label
+    app: python #Used to select and manage pods with this label
 spec: #The desired state of the deployment
   replicas: 1 #Amount of replicas we want !!!! inital amount HPA will change this
   strategy: #What strategy is used to replace old pods with new pods
@@ -12,11 +12,11 @@ spec: #The desired state of the deployment
       maxUnavailable: 40% #When replacing there can at maximum be a % of pods unavailable
   selector: #Defines how the deployment selects pods to manage
     matchLabels: #Matches label to the label of pods with the same label
-      app: haskell #Name of the label of the pods we want to manage
+      app: python #Name of the label of the pods we want to manage
   template: #Template for the pods
     metadata:
       labels:
-        app: haskell #Matches with the selector
+        app: python #Matches with the selector
     spec:
       affinity:
         nodeAffinity:
@@ -28,12 +28,12 @@ spec: #The desired state of the deployment
                     values:
                       - storage-node
       containers:
-      - name: haskell
-        image: p7project/mozart-haskell:2.0rc4
+      - name: python
+        image: p7project/mozart-python:2.0rc4
         resources: #Sets the allowed amount of resources for the container
             requests: #This is the resources required by each container
-              cpu: 2500m #100 milliCPU (10% of one CPU core)
-              memory: 500Mi
+              cpu: 700m #e.g. 100 milliCPU (10% of one CPU core)
+              memory: 100Mi
         ports:
         - name: http-port
           containerPort: 8080 #What port the container is listening on
@@ -53,13 +53,13 @@ spec: #The desired state of the deployment
 apiVersion: v1
 kind: Service
 metadata:
-  name: haskell-service
+  name: python-service
 spec:
   type: ClusterIP
   selector:
-    app: haskell #Must be the same as the pod label in deployment under "template"
+    app: python #Must be the same as the pod label in deployment under "template"
   ports:
-    - name: haskell-service-port  
+    - name: python-service-port  
       protocol: TCP
       port: 8080 #The port the service is listening on
       targetPort: http-port #Target port (The port of the pods)

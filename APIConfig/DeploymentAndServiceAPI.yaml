@@ -25,7 +25,7 @@ spec: #The desired state of the deployment
                 - storage-node  # Only schedule on nodes with this label
       containers:
       - name: api
-        image: p7project/api-backend:1.0
+        image: p7project/api-backend:2.0rc3
         resources: #Sets the allowed amount of resources for the container
             requests: #This is the resources required by each container
               cpu: 200m #100 milliCPU (10% of one CPU core)
