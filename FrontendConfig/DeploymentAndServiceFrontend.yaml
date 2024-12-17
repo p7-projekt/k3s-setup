@@ -16,7 +16,7 @@ spec: #The desired state of the deployment
     spec:
       containers:
       - name: frontend
-        image: p7project/frontend-prod:gamma04
+        image: p7project/frontend-prod:2.0
         resources: #Sets the allowed amount of resources for the container
             requests: #This is the resources required by each container
               cpu: 200m #100 milliCPU (10% of one CPU core)
