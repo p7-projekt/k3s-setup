@@ -18,16 +18,22 @@ spec: #The desired state of the deployment
       labels:
         app: haskell #Matches with the selector
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: storage-node
+                    operator: NotIn
+                    values:
+                      - "true"
       containers:
       - name: haskell
-        image: p7project/mozart-haskell:alpha
+        image: p7project/mozart-haskell:delta
         resources: #Sets the allowed amount of resources for the container
-            limits: #Teach container should not be allowed to consume more resources than specified
-              cpu: 200m #200 milliCPU (10% of one CPU core)
-              memory: 200Mi #200MiB of memory (Mebibyte)
             requests: #This is the resources required by each container
-              cpu: 100m #100 milliCPU (10% of one CPU core)
-              memory: 180Mi
+              cpu: 400m #100 milliCPU (10% of one CPU core)
+              memory: 400Mi
         ports:
         - name: http-port
           containerPort: 8080 #What port the container is listening on

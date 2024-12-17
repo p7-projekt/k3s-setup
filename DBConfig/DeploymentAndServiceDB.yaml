@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+          ports:
+            - name: db-port
+              containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres #Must be the same as the pod label in deployment under "template"
+  ports:
+    - name: postgres-service-port
+      port: 5432 #The port the service is listening on
+      targetPort: db-port #Target port (The port of the pods)

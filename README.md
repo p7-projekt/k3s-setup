@@ -28,7 +28,26 @@ To be able to use the autoscaling, the [metric server](https://github.com/kubern
 ```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
-
+## Efficient use of local storage
+To ensure efficent use of local storage, choose a node to contain volumes and the database by labeling it like so:
+```
+kubectl label nodes <node-name> role=storage-node
+```
+## Creating secrets
+Certain variables for the containers should be kept secret as opposed to the data in the already defined config maps. For the API, a secret needs to be set with the folloing values:
+```
+kubectl create secret generic api-secret \
+--from-literal=CONNECTIONSTRING="your_connection_string_here" \
+--from-literal=JWT_KEY="your_jwt_key_here"
+```
+Similarly the configuration used for the database should be set with the following values:
+```
+kubectl create secret generic postgres-secret \
+--from-literal=POSTGRES_DB="name-of-your-db" \
+--from-literal=POSTGRES_USER="your-postgres-user" \
+--from-literal=POSTGRES_PASSWORD="your-postgres-password"
+```
+This will create the necesarry environment values required by both the api and DB to correctly work
 ## Network rules
 Additionally, network rules need to be configured for server and worker nodes
 for more information on ingress/engress rules refer to [k3s docs](https://docs.k3s.io/installation/requirements?os=debian#networking)

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment #Name of the deployment in the namespace
+  labels:
+    app: frontend #Used to select and manage pods with this label
+spec: #The desired state of the deployment
+  replicas: 1 #Amount of replicas we want !!!! inital amount HPA will change this
+  selector: #Defines how the deployment selects pods to manage
+    matchLabels: #Matches label to the label of pods with the same label
+      app: frontend #Name of the label of the pods we want to manage
+  template: #Template for the pods
+    metadata:
+      labels:
+        app: frontend #Matches with the selector
+    spec:
+      containers:
+      - name: frontend
+        image: p7project/frontend-prod:gamma04
+        resources: #Sets the allowed amount of resources for the container
+            requests: #This is the resources required by each container
+              cpu: 200m #100 milliCPU (10% of one CPU core)
+              memory: 200Mi
+        ports:
+        - name: http-port
+          containerPort: 3000 #What port the container is listening on
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: ClusterIP
+  selector:
+    app: frontend #Must be the same as the pod label in deployment under "template"
+  ports:
+    - name: frontend-service-port
+      protocol: TCP
+      port: 8080 #The port the service is listening on
+      targetPort: http-port #Target port (The port of the pods)
