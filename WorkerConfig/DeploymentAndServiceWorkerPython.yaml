@@ -29,7 +29,7 @@ spec: #The desired state of the deployment
                       - storage-node
       containers:
       - name: python
-        image: p7project/mozart-python:2.0rc4
+        image: p7project/mozart-python:2.0
         resources: #Sets the allowed amount of resources for the container
             requests: #This is the resources required by each container
               cpu: 700m #e.g. 100 milliCPU (10% of one CPU core)
